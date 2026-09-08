@@ -1,3 +1,25 @@
+// Elementor normally creates these players; restore them without its WordPress runtime.
+document.querySelectorAll('[data-settings]').forEach(widget => {
+  let settings;
+  try { settings = JSON.parse(widget.getAttribute('data-settings')); } catch { return; }
+  if (settings.video_type !== 'youtube' || !settings.youtube_url) return;
+  let url;
+  try { url = new URL(settings.youtube_url); } catch { return; }
+  const id = url.hostname === 'youtu.be' ? url.pathname.slice(1) : url.searchParams.get('v') || url.pathname.split('/').pop();
+  if (!/^[\w-]{11}$/.test(id || '')) return;
+  const placeholder = widget.querySelector('.elementor-video');
+  if (!placeholder || placeholder.tagName === 'IFRAME') return;
+  const player = document.createElement('iframe');
+  player.className = placeholder.className;
+  player.src = `https://www.youtube.com/embed/${id}?controls=${settings.controls === 'no' ? '0' : '1'}&playsinline=1`;
+  player.title = `YouTube-video — ${document.querySelector('h1')?.textContent.trim() || 'Bilibel'}`;
+  player.loading = 'lazy';
+  player.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+  player.allowFullscreen = true;
+  player.referrerPolicy = 'strict-origin-when-cross-origin';
+  player.style.border = '0';
+  placeholder.replaceWith(player);
+});
 document.querySelectorAll('[data-thumbnail]').forEach(el=>{const link=el.closest('a');if(link)el.style.backgroundImage=`url("${link.getAttribute('href')}")`});
 document.querySelectorAll('.menu-item-has-children>a').forEach(a=>{if(!a.querySelector('.sub-arrow')){const arrow=document.createElement('span');arrow.className='sub-arrow';arrow.innerHTML='<svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>';a.append(arrow)}});
 document.querySelectorAll('.elementor-menu-toggle').forEach(toggle=>{
