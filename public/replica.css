@@ -1,0 +1,18 @@
+/* Only runtime states formerly supplied by Elementor JavaScript. */
+.elementor-gallery__container{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.elementor-gallery__container .e-gallery-item{position:relative!important;display:block;aspect-ratio:3/2}
+.elementor-gallery__container .e-gallery-image{position:absolute;inset:0;background-size:cover;background-position:center;width:100%;height:100%}
+@media(max-width:767px){.elementor-gallery__container{grid-template-columns:1fr}}
+.elementor-nav-menu--main .sub-menu{display:none;position:absolute;z-index:100;background:white;min-width:240px}
+.elementor-nav-menu--main li:hover>.sub-menu,.elementor-nav-menu--main li:focus-within>.sub-menu{display:block}
+.elementor-menu-toggle.elementor-active+.elementor-nav-menu--dropdown{display:block!important;max-height:80vh!important;overflow:auto!important;transform:none!important}
+.elementor-nav-menu--dropdown:not(.elementor-nav-menu__container) .sub-menu{display:none}
+.replica-slide[hidden]{display:none!important}
+.replica-dots{display:flex;justify-content:center;gap:8px;padding:12px}
+.replica-dots button{border:0;width:7px;height:7px;padding:0;border-radius:50%;background:#ccc}
+.replica-dots button[aria-pressed=true]{background:#555}
+.replica-lightbox{border:0;background:transparent;max-width:95vw;max-height:95vh;padding:30px}
+.replica-lightbox::backdrop{background:#000d}
+.replica-lightbox img{max-height:85vh;width:auto;max-width:85vw}
+.replica-lightbox button{position:absolute;right:0;top:0;background:#fff;color:#111;border:0;padding:5px 12px;font-size:24px}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}

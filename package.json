@@ -1,0 +1,14 @@
+{
+  "name": "bilibel-astro",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build"
+  },
+  "dependencies": {
+    "@astrojs/check": "latest",
+    "astro": "latest",
+    "cheerio": "^1.2.0",
+    "typescript": "latest"
+  }
+}

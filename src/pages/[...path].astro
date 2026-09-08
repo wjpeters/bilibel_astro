@@ -1,0 +1,19 @@
+---
+import pages from '../data/original.json';
+import { descriptions, site, structuredData } from '../data/seo';
+export function getStaticPaths() {
+  return pages.map(page => ({params:{path:page.route==='/'?undefined:page.route.replace(/^\/+|\/+$/g,'')},props:{page}}));
+}
+const {page}=Astro.props;
+// The live site's www-hosted fonts fail CORS; preserve its visible sans-serif fallback.
+const description = descriptions[page.route];
+if (!description) throw new Error(`Missing SEO description: ${page.route}`);
+const head = page.head
+  .replace(/<link[^>]*google-fonts[^>]*>/g, '')
+  .replace(/<meta\b[^>]*(?:name|property)=["'](?:description|og:description|twitter:description|og:url)["'][^>]*>/gi, '')
+  .replace(/<link\b[^>]*rel=["']canonical["'][^>]*>/gi, '')
+  .replace(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>/gi, '');
+const schema = JSON.stringify(structuredData(page.route, page.title, description)).replace(/</g, '\\u003c');
+---
+<!DOCTYPE html>
+<html lang="nl-NL"><head><title>{page.title}</title><Fragment set:html={head}/><meta name="description" content={description}/><meta property="og:description" content={description}/><meta name="twitter:description" content={description}/><link rel="canonical" href={site + page.route}/><meta property="og:url" content={site + page.route}/><script is:inline type="application/ld+json" set:html={schema}/><link rel="stylesheet" href="/replica.css"/></head><body {...page.bodyAttrs}><Fragment set:html={page.body}/><script is:inline src="/replica.js"></script></body></html>

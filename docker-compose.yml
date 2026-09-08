@@ -1,0 +1,9 @@
+services:
+  bilibel:
+    build: .
+    ports:
+      - "4322:4321"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run dev -- --host 0.0.0.0 --port 4321
