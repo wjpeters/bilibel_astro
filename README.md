@@ -14,7 +14,7 @@ Open http://localhost:4322.
 - `src/data/original.json`: oorspronkelijke pagina-inhoud, met lokale links en assets.
 - `src/pages/[...path].astro`: statische Astro-routes voor alle geïmporteerde pagina’s.
 - `public/original`: lokale oorspronkelijke CSS, afbeeldingen en lettertypen.
-- `public/replica.js`: mobiele navigatie, submenu’s, reviews en fotovenster.
+- `public/replica.js`: mobiele navigatie, submenu’s, reviews en fotovenster. Het copyrightjaar in de footer wordt bij het bouwen én bij ieder paginabezoek automatisch bijgewerkt; daarvoor is geen jaarlijkse publicatie nodig.
 - `scripts/import-original.mjs`: herhaalbare import van intern gelinkte openbare pagina’s en assets. Gebruik bewust: dit vernieuwt de broninhoud.
 - `src/data/import-report.json`: geïmporteerde routes, assetaantal en downloadfouten.
 

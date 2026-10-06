@@ -1,3 +1,7 @@
+document.querySelectorAll('[data-copyright-year]').forEach(element => {
+  element.textContent = String(new Date().getFullYear());
+});
+
 // Elementor normally creates these players; restore them without its WordPress runtime.
 document.querySelectorAll('[data-settings]').forEach(widget => {
   let settings;

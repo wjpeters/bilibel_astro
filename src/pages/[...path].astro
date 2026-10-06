@@ -13,7 +13,11 @@ const head = page.head
   .replace(/<meta\b[^>]*(?:name|property)=["'](?:description|og:description|twitter:description|og:url)["'][^>]*>/gi, '')
   .replace(/<link\b[^>]*rel=["']canonical["'][^>]*>/gi, '')
   .replace(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>/gi, '');
+const body = page.body.replace(
+  /© Bilibel\. \d{4} All rights reserved\./g,
+  `© Bilibel. <span data-copyright-year>${new Date().getFullYear()}</span> All rights reserved.`,
+);
 const schema = JSON.stringify(structuredData(page.route, page.title, description)).replace(/</g, '\\u003c');
 ---
 <!DOCTYPE html>
-<html lang="nl-NL"><head><title>{page.title}</title><Fragment set:html={head}/><meta name="description" content={description}/><meta property="og:description" content={description}/><meta name="twitter:description" content={description}/><link rel="canonical" href={site + page.route}/><meta property="og:url" content={site + page.route}/><script is:inline type="application/ld+json" set:html={schema}/><link rel="stylesheet" href="/replica.css"/></head><body {...page.bodyAttrs}><Fragment set:html={page.body}/><script is:inline src="/replica.js"></script></body></html>
+<html lang="nl-NL"><head><title>{page.title}</title><Fragment set:html={head}/><meta name="description" content={description}/><meta property="og:description" content={description}/><meta name="twitter:description" content={description}/><link rel="canonical" href={site + page.route}/><meta property="og:url" content={site + page.route}/><script is:inline type="application/ld+json" set:html={schema}/><link rel="stylesheet" href="/replica.css"/></head><body {...page.bodyAttrs}><Fragment set:html={body}/><script is:inline src="/replica.js"></script></body></html>
